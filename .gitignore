@@ -1,0 +1,6 @@
+# Java bytecode files
+*.class
+
+# Temp files
+*.*~
+*~
