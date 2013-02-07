@@ -138,9 +138,9 @@ public class DemoFrame extends JFrame {
 		jbtStartOrSuspend.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(jbtStartOrSuspend.getText().equals("Start")){
-					jbtStartOrSuspend.setText("Suspend");
 					thread=new Thread(driving);
 					thread.start();
+					jbtStartOrSuspend.setText("Suspend");
 				}
 				else{
 					thread.stop();
@@ -155,6 +155,7 @@ public class DemoFrame extends JFrame {
 				jbtStartOrSuspend.setText("Start");
 				int[] unsort=new int[count];
 				System.arraycopy(numberGroup, 0, unsort, 0, count);
+				drawing.highlight(-1,-1);
 				drawing.draw(unsort);
 				driving.setArray(unsort);	
 			}
