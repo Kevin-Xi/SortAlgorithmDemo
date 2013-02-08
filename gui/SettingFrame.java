@@ -1,6 +1,5 @@
 package gui;
 
-import gui.DemoFrame;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
@@ -19,7 +18,7 @@ import java.awt.event.*;
  */
 public class SettingFrame extends JFrame {
 	/* Setting Panel "Run" */
-	private ButtonGroup bgAlgorithm=new ButtonGroup();
+	//private ButtonGroup bgAlgorithm=new ButtonGroup();
 	private JCheckBox jcbSelection=new JCheckBox("Selection");
 	private JCheckBox jcbInsertion=new JCheckBox("Insertion");
 	private JCheckBox jcbBubble=new JCheckBox("Bubble");
@@ -27,6 +26,7 @@ public class SettingFrame extends JFrame {
 	private JCheckBox jcbHeap=new JCheckBox("Heap");
 	private JCheckBox jcbShell=new JCheckBox("Shell");
 	private JLabel jlbAlgorithm=new JLabel("Algorithm:");
+	private String algorithmSelectedStatus="";
 	private JPanel jpAlgorithm=new JPanel();
 	
 	private JLabel jlbCount=new JLabel("Count:");
@@ -38,10 +38,10 @@ public class SettingFrame extends JFrame {
 	
 	/* Setting Panel Appearance */
 	private ButtonGroup bgShape=new ButtonGroup();
-	private JCheckBox jcbColumn=new JCheckBox("Column");
-	private JCheckBox jcbCircle=new JCheckBox("Circle");
-	private JCheckBox jcbTriangle=new JCheckBox("Triangle");
-	private JCheckBox jcbDiamond=new JCheckBox("Diamond");
+	private JRadioButton jrbColumn=new JRadioButton("Column");
+	private JRadioButton jrbCircle=new JRadioButton("Circle");
+	private JRadioButton jrbTriangle=new JRadioButton("Triangle");
+	private JRadioButton jrbDiamond=new JRadioButton("Diamond");
 	private JLabel jlbShape=new JLabel("Shape:");
 	private JPanel jpShape=new JPanel();
 
@@ -78,14 +78,12 @@ public class SettingFrame extends JFrame {
 	 * Setting panel "Run"
 	 */
 	private void constructRunPanel(){		
-		/* Button group of algorithm selection panel */
-		bgAlgorithm.add(jcbSelection);
-		bgAlgorithm.add(jcbInsertion);
-		bgAlgorithm.add(jcbBubble);
-		bgAlgorithm.add(jcbQuick);
-		bgAlgorithm.add(jcbHeap);
-		bgAlgorithm.add(jcbShell);
 		jcbSelection.setSelected(true);
+		jcbInsertion.setSelected(true);
+		jcbBubble.setSelected(true);
+		jcbQuick.setSelected(true);
+		jcbHeap.setSelected(true);
+		jcbShell.setSelected(true);
 		
 		/* Construct algorithm selection panel */
 		jpAlgorithm.setLayout(new GridLayout(1,7));
@@ -113,11 +111,11 @@ public class SettingFrame extends JFrame {
 	 */
 	private void constructAppearancePanel(){
 		/* Button group of shape selection */
-		bgShape.add(jcbColumn);
-		bgShape.add(jcbCircle);
-		bgShape.add(jcbTriangle);
-		bgShape.add(jcbDiamond);
-		jcbColumn.setSelected(true);
+		bgShape.add(jrbColumn);
+		bgShape.add(jrbCircle);
+		bgShape.add(jrbTriangle);
+		bgShape.add(jrbDiamond);
+		jrbColumn.setSelected(true);
 		
 		/* Construct a upper panel of jpAppearance */
 		jpColor.setLayout(new FlowLayout());
@@ -127,10 +125,10 @@ public class SettingFrame extends JFrame {
 		/* Construct shape panel */
 		jpShape.setLayout(new GridLayout(1,5));
 		jpShape.add(jlbShape);
-		jpShape.add(jcbColumn);
-		jpShape.add(jcbCircle);
-		jpShape.add(jcbTriangle);
-		jpShape.add(jcbDiamond);
+		jpShape.add(jrbColumn);
+		jpShape.add(jrbCircle);
+		jpShape.add(jrbTriangle);
+		jpShape.add(jrbDiamond);
 		
 		jpAppearance.setLayout(new BorderLayout());
 		jpAppearance.add(jpColor,BorderLayout.NORTH);
@@ -168,7 +166,7 @@ public class SettingFrame extends JFrame {
 				
 				
 				
-				demoFrame=new DemoFrame(colorStart,colorEnd,colorHighlight,getShapeSelected(),getAlgorithmSelected(),count);	//?????is that good?
+				demoFrame=new DemoFrame(colorStart,colorEnd,colorHighlight,getShapeSelected(),getAlgorithmSelectedStatus(),count);	//?????is that good?
 				
 				demoFrame.setTitle("Sort Algorithm Demo");
 				demoFrame.setSize(750,550);
@@ -236,8 +234,45 @@ public class SettingFrame extends JFrame {
 			return Algorithms.QUICK;
 		else if(jcbHeap.isSelected())
 			return Algorithms.HEAP;
-		else
+		else if(jcbShell.isSelected())
 			return Algorithms.SHELL;
+		return null;
+	}
+	
+	private String getAlgorithmSelectedStatus(){
+		algorithmSelectedStatus="";
+		
+		if(jcbSelection.isSelected())
+			algorithmSelectedStatus+="1";
+		else
+			algorithmSelectedStatus+="0";
+		
+		if(jcbInsertion.isSelected())
+			algorithmSelectedStatus+="1";
+		else
+			algorithmSelectedStatus+="0";
+		
+		if(jcbBubble.isSelected())
+			algorithmSelectedStatus+="1";
+		else
+			algorithmSelectedStatus+="0";
+		
+		if(jcbQuick.isSelected())
+			algorithmSelectedStatus+="1";
+		else
+			algorithmSelectedStatus+="0";
+		
+		if(jcbHeap.isSelected())
+			algorithmSelectedStatus+="1";
+		else
+			algorithmSelectedStatus+="0";
+		
+		if(jcbShell.isSelected())
+			algorithmSelectedStatus+="1";
+		else
+			algorithmSelectedStatus+="0";
+		
+		return algorithmSelectedStatus;
 	}
 	
 	/**
@@ -245,7 +280,7 @@ public class SettingFrame extends JFrame {
 	 * @return
 	 */
 	private Shapes getShapeSelected(){
-		if(jcbColumn.isSelected())
+		if(jrbColumn.isSelected())
 			return Shapes.COLUMN;
 		return Shapes.CIRCLE;
 	}

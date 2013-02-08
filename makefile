@@ -5,7 +5,7 @@ JAVA = java
 .java.class :
 	$(JAVAC) $<
 
-engine/SortAlgorithmDemo.class : engine/SortAlgorithmDemo.java engine/Driving.class gui/*.class algorithm/*.class
+engine/SortAlgorithmDemo.class : engine/SortAlgorithmDemo.java engine/Driving.class gui/Column.class gui/DemoFrame.class gui/SettingFrame.class algorithm/BubbleSort.class algorithm/HeapSort.class algorithm/InsertionSort.class algorithm/QuickSort.class algorithm/SelectionSort.class algorithm/ShellSort.class
 engine/Driving.class : engine/Driving.java
 algorithm/BubbleSort.class : algorithm/BubbleSort.java
 algorithm/HeapSort.class : algorithm/HeapSort.java
